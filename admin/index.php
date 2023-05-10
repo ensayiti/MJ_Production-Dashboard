@@ -99,14 +99,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         <!-- Pesanan -->
                         <li class="nav-header">ORDER</li>
                         <li class="nav-item">
-                            <a href="order-add.php" class="nav-link">
-                                <i class="nav-icon fa fa-plus"></i>
-                                <p>
-                                    Tambah Order
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="order-list.php" class="nav-link">
                                 <i class="nav-icon fa fa-list-alt"></i>
                                 <p>
@@ -125,24 +117,16 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         </li>
 
                         <li class="nav-item">
-                            <a href="reject-list.php" class="nav-link disabled">
+                            <a href="reject-list.php" class="nav-link">
                                 <i class="nav-icon fa fa-ban"></i>
                                 <p>
-                                    List Reject (On Progress)
+                                    List Reject
                                 </p>
                             </a>
                         </li>
 
                         <!-- Inventory -->
                         <li class="nav-header">INVENTORY</li>
-                        <li class="nav-item">
-                            <a href="inventory-add.php" class="nav-link">
-                                <i class="nav-icon fa fa-plus"></i>
-                                <p>
-                                    Tambah Barang
-                                </p>
-                            </a>
-                        </li>
 
                         <li class="nav-item">
                             <a href="inventory-list.php" class="nav-link">
@@ -247,10 +231,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                                             <?php echo $row['Sisa_Pembayaran'] ?>
                                                         </td>
                                                         <td>
-                                                            <a class="btn btn-sm btn-primary" href="<?php echo $row['Note'] ?>" download>Unduh</a>
+                                                            <a class="btn btn-sm btn-primary"
+                                                                href="<?php echo $row['Note'] ?>" download>Unduh</a>
                                                         </td>
                                                         <td>
-                                                            <img class='img-fluid' src="<?php echo $row['Gambar'] ?>">
+                                                            <a class="btn btn-sm btn-primary"
+                                                                href="<?php echo $row['Gambar'] ?>" download>Unduh</a>
                                                         </td>
                                                         <td>
                                                             <?php if ($row['Status'] == 'New Order') { ?>
@@ -377,9 +363,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                 </div>
                                 <!-- Card Footer -->
                                 <div class="card-footer clearfix">
-                                    <a href="order-add.php" class="btn btn-sm btn-info float-left">Tambah Order</a>
-                                    <a href="javascript:void(0)"
-                                        class="btn btn-sm btn-secondary float-right">Pagination</a>
+                                    <!--<a href="order-add.php" class="btn btn-sm btn-info float-left">Tambah Order</a>-->
+                                    <!--<a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Pagination</a>-->
                                 </div>
                             </div>
                         </div>
@@ -402,31 +387,52 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
                                         <table class="table m-0 table-hover text-nowrap">
-                                            <thead class="text-center">
-                                                <tr>
-                                                    <th>Kode</th>
+                                            <thead>
+                                                <tr class='text-center'>
+                                                    <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
                                                     <th>Kategori</th>
                                                     <th>Jenis Satuan</th>
                                                     <th>Stock</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="text-center">
-                                                <tr>
-                                                    <td>BRG001</td>
-                                                    <td>Cotton</td>
-                                                    <td>Bahan</td>
-                                                    <td>Meter</td>
-                                                    <td>10meter</td>
-                                                </tr>
+                                            <tbody>
+                                                <?php
+                                                include '../connection.php';
+
+                                                $id = $_GET['Kode_Barang'];
+                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Inventory");
+                                                while ($row = mysqli_fetch_array($data)) {
+                                                    ?>
+                                                    <tr class="text-center">
+
+                                                        <td>
+                                                            <?php echo $row['Kode_Barang'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Nama_Barang'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Kategori'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Jenis_Satuan'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Stock'] ?>
+                                                        </td>
+
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <!-- Card Footer -->
                                 <div class="card-footer clearfix">
-                                    <a href="javascript:void(0)"
-                                        class="btn btn-sm btn-secondary float-right">Pagination</a>
+                                    <!--<a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Pagination</a>-->
                                 </div>
                             </div>
                         </div>
@@ -465,17 +471,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                     <span class="info-box-text">Total Order</span>
                                     <span class="info-box-number">
                                         <?php echo $total_orders; ?>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="info-box mb-3 bg-success">
-                                <span class="info-box-icon"><i class="fas fa-money-bill-wave"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">DP Masuk</span>
-                                    <span class="info-box-number">
-                                        <?php echo number_format($total_dp, 0, ',', '.'); ?>
                                     </span>
                                 </div>
                             </div>

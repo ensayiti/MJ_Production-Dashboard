@@ -11,7 +11,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | List Inventory</title>
+    <title>Admin | Tambah Reject</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -22,6 +22,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -129,7 +131,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         <li class="nav-header">INVENTORY</li>
 
                         <li class="nav-item">
-                            <a href="inventory-list.php" class="nav-link active">
+                            <a href="inventory-list.php" class="nav-link">
                                 <i class="nav-icon fa fa-inbox"></i>
                                 <p>
                                     List Inventory
@@ -148,12 +150,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">List Inventory</h1>
+                            <h1 class="m-0">Tambah Reject</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">List Inventory</li>
+                                <li class="breadcrumb-item active">Tambah Reject</li>
                             </ol>
                         </div>
                     </div>
@@ -166,68 +168,66 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header border-transparent">
-                                    <h3 class="card-title">List Inventory</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Form Tambah Reject</h3>
                                 </div>
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table m-0 table-hover text-nowrap">
-                                            <thead>
-                                                <tr class='text-center'>
-                                                    <!--<th>#</th>-->
-                                                    <th>Kode Barang</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Kategori</th>
-                                                    <th>Jenis Satuan</th>
-                                                    <th>Stock</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                include '../connection.php';
 
-                                                $id = $_GET['Kode_Barang'];
-                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Inventory");
-                                                while ($row = mysqli_fetch_array($data)) {
-                                                    ?>
-                                                    <tr class="text-center">
-                                                        <td>
-                                                            <?php echo $row['Kode_Barang'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Nama_Barang'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Kategori'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Jenis_Satuan'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Stock'] ?>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Card Footer -->
-                                <div class="card-footer clearfix">
-                                    <!--<a href="inventory-add.php" class="btn btn-sm btn-info float-left">Tambah Barang</a>-->
-                                    <!--<a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Pagination</a>-->
-                                </div>
+                                <?php
+                                include '../connection.php';
+
+                                $id = $_GET['No_Invoice'];
+                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Order WHERE No_Invoice = '$id'");
+                                while ($row = mysqli_fetch_array($data)) {
+                                    ?>
+                                    <form action="reject-save.php" method="post" value='Simpan'>
+                                        <div class="card-body">
+                                            <div class="form-group form-group-sm">
+                                                <input type="text" name="No_Invoice" class="form-control form-control-sm"
+                                                    value="<?php echo $row['No_Invoice'] ?>" placeholder="No. Invoice"
+                                                    readonly>
+                                            </div>
+
+                                            <div class="form-group form-group-sm">
+                                                <label for="NamaCustomer">Nama Customer</label>
+                                                <input type="text" name="Nama_Customer" class="form-control form-control-sm"
+                                                    value="<?php echo $row['Nama_Customer'] ?>" placeholder="Nama Customer"
+                                                    readonly>
+                                            </div>
+
+                                            <div class="form-group form-group-sm">
+                                                <label for="NamaReject">Nama Reject</label>
+                                                <input type="text" name="Nama_Reject" class="form-control form-control-sm"
+                                                    id="NamaReject" placeholder="Masukan Nama Reject">
+                                            </div>
+
+                                            <div class="form-group form-group-sm">
+                                                <label for="Harga">Harga</label>
+                                                <input type="text" name="Harga" class="form-control form-control-sm"
+                                                    id="Harga" placeholder="Masukan Harga">
+                                            </div>
+
+                                            <div class="form-group form-group-sm">
+                                                <label for="Note">Note</label>
+                                                <input type="text" name="Note" class="form-control form-control-sm"
+                                                    id="Note" placeholder="Note">
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <button type="submit" name="Simpan" value="Simpan"
+                                                class="btn btn-success">Simpan</button>
+                                            <a type="button" href='order-list.php'
+                                                class="btn btn-secondary ml-2">Kembali</a>
+                                        </div>
+                                    </form>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
         </div>
 
@@ -256,7 +256,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     <script src="../plugins/jquery-mapael/jquery.mapael.min.js"></script>
     <script src="../plugins/jquery-mapael/maps/usa_states.min.js"></script>
     <!-- ChartJS -->
-    <script src="../plugins/chart.js/Chart.min.js"></script>
+    <script src="plugins/chart.js/Chart.min.js"></script>
 </body>
 
 </html>

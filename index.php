@@ -209,10 +209,12 @@
                                                             <?php echo $row['Sisa_Pembayaran'] ?>
                                                         </td>
                                                         <td>
-                                                            <a class="btn btn-sm btn-primary" href="<?php echo $row['Note'] ?>" download>Unduh</a>
+                                                            <a class="btn btn-sm btn-primary"
+                                                                href="<?php echo $row['Note'] ?>" download>Unduh</a>
                                                         </td>
                                                         <td>
-                                                            <img class='img-fluid' src="<?php echo $row['Gambar'] ?>">
+                                                            <a class="btn btn-sm btn-primary"
+                                                                href="<?php echo $row['Gambar'] ?>" download>Unduh</a>
                                                         </td>
                                                         <td>
                                                             <?php if ($row['Status'] == 'New Order') { ?>
@@ -372,14 +374,36 @@
                                                     <th>Stock</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="text-center">
-                                                <tr>
-                                                    <td>BRG001</td>
-                                                    <td>Cotton</td>
-                                                    <td>Bahan</td>
-                                                    <td>Meter</td>
-                                                    <td>10meter</td>
-                                                </tr>
+                                            <tbody>
+                                                <?php
+                                                include '../connection.php';
+
+                                                $id = $_GET['Kode_Barang'];
+                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Inventory");
+                                                while ($row = mysqli_fetch_array($data)) {
+                                                    ?>
+                                                    <tr class="text-center">
+
+                                                        <td>
+                                                            <?php echo $row['Kode_Barang'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Nama_Barang'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Kategori'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Jenis_Satuan'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['Stock'] ?>
+                                                        </td>
+
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -430,7 +454,7 @@
                                 </div>
                             </div>
 
-                            <div class="info-box mb-3 bg-success">
+                            <!-- <div class="info-box mb-3 bg-success">
                                 <span class="info-box-icon"><i class="fas fa-money-bill-wave"></i></span>
 
                                 <div class="info-box-content">
@@ -439,7 +463,7 @@
                                         <?php echo number_format($total_dp, 0, ',', '.'); ?>
                                     </span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="info-box mb-3 bg-danger">
                                 <span class="info-box-icon"><i class="fas fa-check"></i></span>

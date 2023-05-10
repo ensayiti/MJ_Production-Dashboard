@@ -11,7 +11,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | List Inventory</title>
+    <title>Admin | List Reject</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -117,7 +117,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         </li>
 
                         <li class="nav-item">
-                            <a href="reject-list.php" class="nav-link">
+                            <a href="reject-list.php" class="nav-link active">
                                 <i class="nav-icon fa fa-ban"></i>
                                 <p>
                                     List Reject
@@ -127,9 +127,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
 
                         <!-- Inventory -->
                         <li class="nav-header">INVENTORY</li>
-
                         <li class="nav-item">
-                            <a href="inventory-list.php" class="nav-link active">
+                            <a href="inventory-list.php" class="nav-link">
                                 <i class="nav-icon fa fa-inbox"></i>
                                 <p>
                                     List Inventory
@@ -148,12 +147,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">List Inventory</h1>
+                            <h1 class="m-0">List Reject</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">List Inventory</li>
+                                <li class="breadcrumb-item active">List Reject</li>
                             </ol>
                         </div>
                     </div>
@@ -168,7 +167,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <h3 class="card-title">List Inventory</h3>
+                                    <h3 class="card-title">List Reject</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                             <i class="fas fa-minus"></i>
@@ -181,37 +180,39 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                             <thead>
                                                 <tr class='text-center'>
                                                     <!--<th>#</th>-->
-                                                    <th>Kode Barang</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Kategori</th>
-                                                    <th>Jenis Satuan</th>
-                                                    <th>Stock</th>
+                                                    <th>Invoice</th>
+                                                    <th>Nama Customer</th>
+                                                    <th>Nama Reject</th>
+                                                    <th>Harga</th>
+                                                    <th>Note</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 include '../connection.php';
 
-                                                $id = $_GET['Kode_Barang'];
-                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Inventory");
+                                                $id = $_GET['No_Invoice'];
+                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Reject");
                                                 while ($row = mysqli_fetch_array($data)) {
                                                     ?>
                                                     <tr class="text-center">
+
                                                         <td>
-                                                            <?php echo $row['Kode_Barang'] ?>
+                                                            <?php echo $row['No_Invoice'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $row['Nama_Barang'] ?>
+                                                            <?php echo $row['Nama_Reject'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $row['Kategori'] ?>
+                                                            <?php echo $row['Nama_Customer'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $row['Jenis_Satuan'] ?>
+                                                            <?php echo $row['Harga'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $row['Stock'] ?>
+                                                            <?php echo $row['Note'] ?>
                                                         </td>
+
                                                     </tr>
                                                     <?php
                                                 }

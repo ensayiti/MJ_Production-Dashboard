@@ -99,14 +99,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         <!-- Pesanan -->
                         <li class="nav-header">ORDER</li>
                         <li class="nav-item">
-                            <a href="order-add.php" class="nav-link">
-                                <i class="nav-icon fa fa-plus"></i>
-                                <p>
-                                    Tambah Order
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="order-list.php" class="nav-link">
                                 <i class="nav-icon fa fa-list-alt"></i>
                                 <p>
@@ -125,24 +117,16 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                         </li>
 
                         <li class="nav-item">
-                            <a href="reject-list.php" class="nav-link disabled">
+                            <a href="reject-list.php" class="nav-link">
                                 <i class="nav-icon fa fa-ban"></i>
                                 <p>
-                                    List Reject (On Progress)
+                                    List Reject
                                 </p>
                             </a>
                         </li>
 
                         <!-- Inventory -->
                         <li class="nav-header">INVENTORY</li>
-                        <li class="nav-item">
-                            <a href="inventory-add.php" class="nav-link">
-                                <i class="nav-icon fa fa-plus"></i>
-                                <p>
-                                    Tambah Barang
-                                </p>
-                            </a>
-                        </li>
 
                         <li class="nav-item">
                             <a href="inventory-list.php" class="nav-link">
@@ -334,9 +318,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                 </div>
                                 <!-- Card Footer -->
                                 <div class="card-footer clearfix">
-                                    <a href="order-add.php" class="btn btn-sm btn-info float-left">Tambah Order</a>
-                                    <a href="javascript:void(0)"
-                                        class="btn btn-sm btn-secondary float-right">Pagination</a>
+                                    <!--<a href="order-add.php" class="btn btn-sm btn-info float-left">Tambah Order</a>-->
+                                    <!--<a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Pagination</a>-->
                                 </div>
                             </div>
                         </div>

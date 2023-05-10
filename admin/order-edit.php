@@ -184,326 +184,47 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                                 include '../connection.php';
 
                                 $id = $_GET['No_Invoice'];
-                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Order LIMIT 1");
+                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Order WHERE No_Invoice = '$id'");
                                 while ($row = mysqli_fetch_array($data)) {
                                     ?>
                                     <form action="order-update.php" method="post" value='Simpan'>
                                         <div class="card-body">
                                             <div class="form-group form-group-sm">
                                                 <input type="text" name="No_Invoice" class="form-control form-control-sm"
-                                                    value="<?php echo $row['No_Invoice'] ?>" placeholder="No. Invoice">
+                                                    value="<?php echo $row['No_Invoice'] ?>" placeholder="No. Invoice"
+                                                    readonly>
                                             </div>
 
                                             <div class="form-group form-group-sm">
                                                 <label for="NamaCustomer">Nama Customer</label>
                                                 <input type="text" name="Nama_Customer" class="form-control form-control-sm"
                                                     id="NamaCustomer" placeholder="Masukan Nama Customer"
-                                                    value="<?php echo $row['Nama_Customer'] ?>">
+                                                    value="<?php echo $row['Nama_Customer'] ?>" readonly>
                                             </div>
 
-                                            <div class="form-group form-group-sm">
-                                                <label for="NamaCustomer">Nama Pesanan</label>
-                                                <input type="text" name="Nama_Pesanan" class="form-control form-control-sm"
-                                                    id="NamaCustomer" placeholder="Masukan Nama Pesanan"
-                                                    value="<?php echo $row['Nama_Pesanan'] ?>">
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-6">
+                                            <div class="row mt-3">
+                                                <div class="col">
                                                     <div class="form-group form-group-sm">
-                                                        <label for="TanggalPesan">Tanggal Pesan</label>
-                                                        <input type="date" name="Tanggal_Pesanan"
-                                                            class="form-control form-control-sm" id="TanggalPesan"
-                                                            placeholder="Masukan Tanggal"
-                                                            value="<?php echo $row['Tanggal_Pesanan'] ?>">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <div class="form-group form-group-sm">
-                                                        <label for="TanggalJadi">Tanggal Estimasi Jadi</label>
-                                                        <input type="date" name="Tanggal_Jadi"
-                                                            class="form-control form-control-sm" id="TanggalJadi"
-                                                            placeholder="Masukan Tanggal"
-                                                            value="<?php echo $row['Tanggal_Jadi'] ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!--------------------------------------- ITEM --------------------------------------->
-                                        <h3 class='font-weight-bold'>Item</h3>
-
-                                        <?php
-                                        include '../connection.php';
-                                        $sql = "SELECT * FROM Table_Pesanan_Item";
-                                        $result = mysqli_query($koneksi, $sql);
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            ?>
-                                        <div class="row after-add-more">
-                                            <div class="col">
-                                                <div class="form-group form-group-sm">
-                                                    <label for="NamaItem" class='text-xs'>Nama Item</label>
-                                                    <input type="text" name="Nama_Item[]"
-                                                        class="form-control form-control-sm" id="NamaItem"
-                                                        placeholder="Masukan Item"
-                                                        value="<?php echo $row['Nama_Item']; ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="form-group form-group-sm">
-                                                    <label for="Qty" class='text-xs'>Qty</label>
-                                                    <input type="text" name="Qty[]" class="form-control form-control-sm"
-                                                        id="Qty" placeholder="Masukan Qty"
-                                                        value="<?php echo $row['Qty']; ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="form-group form-group-sm">
-                                                    <label for="HargaSatuan" class='text-xs'>Harga Satuan</label>
-                                                    <input type="text" name="Harga_Satuan[]"
-                                                        class="form-control form-control-sm" id="HargaSatuan"
-                                                        placeholder="Masukan Harga Satuan Item"
-                                                        onkeyup="formatRupiah(this)"
-                                                        value="<?php echo $row['Harga_Satuan']; ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class='col'>
-                                                <label for="TotalHargaItem" class='text-xs'>Total Harga/item</label>
-                                                <div class="input-group">
-
-                                                    <input type="text" name="Total_Harga_Item[]"
-                                                        class="form-control form-control-sm" id="TotalHargaItem"
-                                                        placeholder="Total Harga" onkeyup="formatRupiah(this)"
-                                                        value="<?php echo $row['Total_Harga_Item']; ?>">
-
-                                                    <div class="input-group-prepend">
-                                                        <button type="button" class="btn btn-sm btn-danger add-more"><i
-                                                                class="fa fa-plus" aria-hidden="true"></i></button>
+                                                        <label for="Status">Status</label>
+                                                        <select class="form-control form-control-sm" name='Status'>
+                                                            <option value="New Order" <?php if ($row['Status'] == "New Order")
+                                                                echo " selected"; ?>>New Order</option>
+                                                            <option value="Desain" <?php if ($row['Status'] == "Desain")
+                                                                echo " selected"; ?>>Desain</option>
+                                                            <option value="Print" <?php if ($row['Status'] == "Print")
+                                                                echo " selected"; ?>>Print</option>
+                                                            <option value="Press" <?php if ($row['Status'] == "Press")
+                                                                echo " selected"; ?>>Press</option>
+                                                            <option value="Jahit" <?php if ($row['Status'] == "Jahit")
+                                                                echo " selected"; ?>>Jahit</option>
+                                                            <option value="Finishing" <?php if ($row['Status'] == "Finishing")
+                                                                echo " selected"; ?>>Finishing</option>
+                                                            <option value="Reject" <?php if ($row['Status'] == "Reject")
+                                                                echo " selected"; ?>>Reject</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
-                                        }
-                                        ?>
-
-                                        <!-- Tombol Add -->
-                                            <script type="text/javascript">
-                                                $(document).ready(function () {
-                                                    function addRemoveBtn() {
-                                                        $(".remove-more").remove();
-                                                        $(".after-add-more:not(:first)").each(function () {
-                                                            // tambahkan tombol hapus pada form baru
-                                                            $(this).find(".input-group-prepend").prepend('<button type="button" class="btn btn-sm btn-danger remove-more"><i class="fa fa-trash" aria-hidden="true"></i></button>');
-                                                            // hapus tombol tambah pada form baru
-                                                            $(this).find(".add-more").remove();
-                                                            formatRupiah(this);
-                                                        });
-                                                    }
-
-                                                    $(".add-more").click(function () {
-                                                        var html = $(".after-add-more").last().clone().find("input").val("").end();
-                                                        $(".after-add-more").last().after(html);
-                                                        addRemoveBtn();
-                                                    });
-
-                                                    $(document).on('click', '.remove-more', function () {
-                                                        $(this).closest('.after-add-more').remove();
-                                                        addRemoveBtn();
-                                                    });
-
-                                                    addRemoveBtn();
-                                                });
-                                            </script>
-                                            <!-- Tombol Add -->
-
-                                            <!-- Fungsi Penambahan Qty + HargaSatuan = TotalHargaItem + Semua = TotalHarga -->
-                                            <script>
-                                                $(document).ready(function () {
-                                                    function calculateTotalHargaItem() {
-                                                        $(".after-add-more").each(function (index) {
-                                                            var Qty = $(this).find("[id^=Qty]").val();
-                                                            var HargaSatuan = $(this).find("[id^=HargaSatuan]").val();
-
-                                                            HargaSatuan = HargaSatuan.replace(/\./g, '');
-                                                            Qty = parseInt(Qty);
-                                                            HargaSatuan = parseInt(HargaSatuan);
-                                                            var TotalHargaItem = Qty * HargaSatuan;
-                                                            TotalHargaItem = TotalHargaItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                                                            $(this).find("[id^=TotalHargaItem]").val(TotalHargaItem);
-                                                        });
-                                                        calculateTotalHarga();
-                                                        calculateDPdanSisaPembayaran();
-                                                    }
-
-                                                    function calculateTotalHarga() {
-                                                        var total = 0;
-                                                        $(".after-add-more").each(function () {
-                                                            var TotalHargaItem = $(this).find("[id^=TotalHargaItem]").val();
-                                                            TotalHargaItem = TotalHargaItem.replace(/\./g, '');
-                                                            total += parseInt(TotalHargaItem);
-                                                        });
-                                                        total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                                                        $("#TotalHarga").val(total);
-                                                        calculateDPdanSisaPembayaran();
-                                                    }
-
-                                                    function calculateDPdanSisaPembayaran() {
-                                                        var TotalHarga = $("#TotalHarga").val().replace(/\./g, '');
-                                                        var DP = $("#DP").val().replace(/\./g, '');
-                                                        TotalHarga = parseInt(TotalHarga);
-                                                        DP = parseInt(DP);
-                                                        var SisaPembayaran = TotalHarga - DP;
-                                                        SisaPembayaran = SisaPembayaran.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                                                        $("#Sisa").val(SisaPembayaran);
-                                                    }
-
-                                                    $(document).on('keyup', '[id^=Qty], [id^=HargaSatuan]', function () {
-                                                        calculateTotalHargaItem();
-                                                    });
-
-                                                    $(document).on('click', '.add-more, .remove-more', function () {
-                                                        calculateTotalHargaItem();
-                                                    });
-
-                                                    $(document).on('keyup', '#TotalHarga, #DP', function () {
-                                                        calculateDPdanSisaPembayaran();
-                                                    });
-                                                });
-                                            </script>
-
-                                            <!--------------------------------------- ITEM --------------------------------------->
-
-                                        <div class="form-group form-group-sm">
-                                            <label for="TotalHarga">Total Harga</label>
-                                            <input type="text" name="Total_Harga" class="form-control form-control-sm"
-                                                id="TotalHarga" placeholder="Total Harga Semua"
-                                                onkeyup="formatRupiah(this)" value="<?php echo $row['Total_Harga'] ?>">
-                                        </div>
-
-                                        <div class="form-group form-group-sm">
-                                            <label for="DP">DP Awal</label>
-                                            <input type="text" name="DP_masuk" class="form-control form-control-sm"
-                                                id="DP" placeholder="DP Awal" onkeyup="formatRupiah(this)"
-                                                value="<?php echo $row['DP_masuk'] ?>">
-                                        </div>
-
-                                        <div class="form-group form-group-sm">
-                                            <label for="Sisa">Sisa Pembayaran</label>
-                                            <input type="text" name="Sisa_Pembayaran"
-                                                class="form-control form-control-sm" id="Sisa"
-                                                placeholder='Sisa Pembayaran' onkeyup="formatRupiah(this)"
-                                                value="<?php echo $row['Sisa_Pembayaran'] ?>">
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <label>Note</label>
-                                                <div class="custom-file">
-                                                    <input type="file" name="Note" class="custom-file-input"
-                                                        id="customFile">
-                                                    <label class="custom-file-label" for="customFile">Pilih
-                                                        File</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <label>Mock Up</label>
-                                                <div class="custom-file">
-                                                    <input type="file" name="Gambar" class="custom-file-input"
-                                                        id="customFile">
-                                                    <label class="custom-file-label" for="customFile">Pilih
-                                                        Gambar</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-3">
-                                            <div class="col">
-                                                <div class="form-group form-group-sm">
-                                                    <label for="Status">Status</label>
-                                                    <select class="form-control form-control-sm" name='Status'>
-                                                        <option value="New Order" <?php if ($row['Status'] == "New Order")
-                                                            echo " selected"; ?>>New Order</option>
-                                                        <option value="Desain" <?php if ($row['Status'] == "Desain")
-                                                            echo " selected"; ?>>Desain</option>
-                                                        <option value="Print" <?php if ($row['Status'] == "Print")
-                                                            echo " selected"; ?>>Print</option>
-                                                        <option value="Press" <?php if ($row['Status'] == "Press")
-                                                            echo " selected"; ?>>Press</option>
-                                                        <option value="Jahit" <?php if ($row['Status'] == "Jahit")
-                                                            echo " selected"; ?>>Jahit</option>
-                                                        <option value="Finishing" <?php if ($row['Status'] == "Finishing")
-                                                            echo " selected"; ?>>Finishing</option>
-                                                        <option value="Reject" <?php if ($row['Status'] == "Reject")
-                                                            echo " selected"; ?>>Reject</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="form-group form-group-sm">
-                                                    <label for="NamaCustomer">Reject</label>
-                                                    <select class="form-control form-control-sm" name='Reject'>
-                                                        <option value="Tidak Reject" <?php if ($row['Reject'] == "Tidak Ada Reject")
-                                                            echo " selected"; ?>>Tidak Ada Reject</option>
-                                                        <option value="Reject" <?php if ($row['Reject'] == "Reject")
-                                                            echo " selected"; ?>>Reject</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Format Uang -->
-                                            <script>
-                                                /* Tanpa Rupiah */
-                                                var hargaSatuan = document.getElementById('HargaSatuan');
-                                                hargaSatuan.addEventListener('keyup', function (e) {
-                                                    hargaSatuan.value = formatRupiah(this.value);
-                                                });
-
-                                                var totalHargaItem = document.getElementById('TotalHargaItem');
-                                                totalHargaItem.addEventListener('keyup', function (e) {
-                                                    totalHargaItem.value = formatRupiah(this.value);
-                                                });
-
-                                                var totalHarga = document.getElementById('TotalHarga');
-                                                totalHarga.addEventListener('keyup', function (e) {
-                                                    totalHarga.value = formatRupiah(this.value);
-                                                });
-
-                                                var dp = document.getElementById('DP');
-                                                dp.addEventListener('keyup', function (e) {
-                                                    dp.value = formatRupiah(this.value);
-                                                });
-
-                                                var sisa = document.getElementById('Sisa');
-                                                sisa.addEventListener('keyup', function (e) {
-                                                    sisa.value = formatRupiah(this.value);
-                                                });
-
-                                                /* Fungsi */
-                                                function formatRupiah(input) {
-                                                    var number_string = input.value.replace(/[^,\d]/g, '').toString(),
-
-                                                        split = number_string.split(','),
-                                                        sisa = split[0].length % 3,
-                                                        rupiah = split[0].substr(0, sisa),
-                                                        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-                                                    if (ribuan) {
-                                                        separator = sisa ? '.' : '';
-                                                        rupiah += separator + ribuan.join('.');
-                                                    }
-
-                                                    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-                                                    input.value = rupiah;
-                                                }
-                                            </script>
-                                            <!-- Format Uang -->
                                         </div>
 
                                         <div class="card-footer">
@@ -519,17 +240,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Main row -->
-                <div class="row">
-                    <div class="col-md-8">
-
-                        <!-- TABLE -->
-
-                    </div>
-
-
                 </div>
             </section>
         </div>
