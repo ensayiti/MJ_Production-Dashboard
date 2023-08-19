@@ -4,509 +4,213 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MJ Production</title>
+    <title>Home | MJ Prod</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- Toastr -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <script>
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./dist/globals.css">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-    <div class="wrapper">
-
-        <!-- Login Check / Notif Toastr -->
-        <?php
-        if (isset($_GET['pesan'])) {
-            if ($_GET['pesan'] == "gagal") {
-                echo '<script>toastr.error("Login gagal! username dan password salah!","System Alert")</script>';
-            } else if ($_GET['pesan'] == "logout") {
-                echo '<script>toastr.success("Anda telah berhasil logout","Thank you!")</script>';
-            } else if ($_GET['pesan'] == "belum_login") {
-                echo '<script>toastr.warning("Anda harus login untuk mengakses halaman admin","System Warning")</script>';
-            }
-        }
-        ?>
-
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="dist/img/company_logo.png" alt="Logo" height="60" width="60">
-        </div>
-
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-dark">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
+<body>
+    <div class="antialiased bg-fuchsia-50">
+        <nav class="bg-fuchsia-50 border-b border-fuchsia-950 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
+            <div class="flex flex-wrap justify-between items-center">
+                <div class="flex justify-start items-center">
+                    <button data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg aria-hidden="true" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Toggle sidebar</span>
+                    </button>
+                    <a href="https://flowbite.com" class="flex items-center justify-between mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2 mr-3 w-8 h-8 text-fuchsia-900">
+                            <path d="m18 16 4-4-4-4" />
+                            <path d="m6 8-4 4 4 4" />
+                            <path d="m14.5 4-5 16" />
+                        </svg>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap text-fuchsia-900">MJ Production</span>
                     </a>
-                </li>
-            </ul>
+                </div>
+                <div class="flex items-center lg:order-2">
+                    <!-- <button type="button" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="w-8 h-8 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png" alt="user photo" />
+                    </button> -->
+                    <!-- Dropdown menu -->
+                    <!-- <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow rounded-xl" id="dropdown">
+                        <div class="py-3 px-4">
+                            <span class="block text-sm font-semibold text-gray-900">Neil Sims</span>
+                            <span class="block text-sm text-gray-900 truncate">name@flowbite.com</span>
+                        </div>
+                        <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">My profile</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">Account settings</a>
+                            </li>
+                        </ul>
+                        <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
+                        </ul>
+                        <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">Sign out</a>
+                            </li>
+                        </ul>
+                    </div> -->
+
+                    <!-- Sign In Button -->
+                    <button class="px-5 py-2.5 text-sm font-medium text-fuchsia-50 bg-fuchsia-900 hover:bg-fuchsia-600 focus:ring-2 focus:outline-none focus:ring-fuchsia-950 rounded-lg text-center transition duration-300">
+                        <a href="./auth/login.php">Sign In</a>
+                    </button>
+                </div>
+            </div>
         </nav>
 
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="index.php" class="brand-link">
-                <img src="dist/img/company_logo.png" alt="Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">MJ Production</span>
-            </a>
+        <!-- Sidebar -->
+        <aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-fuchsia-50 border-r border-fuchsia-950 md:translate-x-0" aria-label="Sidenav" id="drawer-navigation">
+            <div class="overflow-y-auto py-5 px-3 h-full bg-fuchsia-50">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-base font-medium text-fuchsia-900 rounded-lg hover:text-fuchsia-50 hover:bg-fuchsia-950 group transition duration-300">
+                            <svg aria-hidden="true" class="w-6 h-6 text-fuchsia-900 group-hover:text-fuchsia-50" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            <span class="ml-3">Dashboard</span>
+                        </a>
+                    </li>
+                    <!-- Customers Menu -->
+                    <li>
+                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-fuchsia-900 rounded-lg hover:text-fuchsia-50 hover:bg-fuchsia-950 group transition duration-300" aria-controls="dropdown-customer" data-collapse-toggle="dropdown-customer">
+                            <svg class="flex-shrink-0 w-6 h-6 text-fuchsia-900 group-hover:text-fuchsia-50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                            </svg>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Customers</span>
+                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="dropdown-customer" class="hidden py-2 space-y-2">
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">Add Customer</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">List Customer</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <li class="nav-item">
-                            <a href="index.php" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
+                    <!-- Orders Menu -->
+                    <li>
+                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-fuchsia-900 rounded-lg hover:text-fuchsia-50 hover:bg-fuchsia-950 group transition duration-300" aria-controls="dropdown-order" data-collapse-toggle="dropdown-order">
+                            <svg class="flex-shrink-0 w-6 h-6 text-fuchsia-900 group-hover:text-fuchsia-50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                                <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
+                            </svg>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Orders</span>
+                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="dropdown-order" class="hidden py-2 space-y-2">
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">Add Order</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">List Order</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">History Order</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                        <!-- Admin -->
-                        <li class="nav-header">ADMIN</li>
-                        <li class="nav-item">
-                            <a href="auth/login.php" class="nav-link">
-                                <i class="nav-icon fa fa-plus"></i>
-                                <p>
-                                    Login
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                    <!-- Inventory Menu -->
+                    <li>
+                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-fuchsia-900 rounded-lg hover:text-fuchsia-50 hover:bg-fuchsia-950 group transition duration-300" aria-controls="dropdown-inventory" data-collapse-toggle="dropdown-inventory">
+                            <svg class="flex-shrink-0 w-6 h-6 text-fuchsia-900 group-hover:text-fuchsia-50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z" />
+                            </svg>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Inventories</span>
+                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="dropdown-inventory" class="hidden py-2 space-y-2">
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">Add Item</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-fuchsia-900 rounded-lg transition duration-300 group hover:text-fuchsia-50 hover:bg-fuchsia-950">List Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200">
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 group">
+                            <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="ml-3">Docs</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white z-20">
+                <a href="#" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100">
+                    <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
+                    </svg>
+                </a>
+                <a href="#" data-tooltip-target="tooltip-settings" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100">
+                    <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <div id="tooltip-settings" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip">
+                    Settings page
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </div>
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+        <main class="p-4 md:ml-64 h-auto pt-20">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                <div class="border-2 border-dashed border-gray-300 rounded-lg h-32 md:h-64"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-32 md:h-64"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-32 md:h-64"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-32 md:h-64"></div>
             </div>
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header border-transparent">
-                                    <h3 class="card-title">List Order</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table m-0 table-hover text-nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>Invoice</th>
-                                                    <th>Nama</th>
-                                                    <th>Pesanan</th>
-                                                    <th>Tgl Pesan</th>
-                                                    <th>Tgl Estimasi</th>
-                                                    <th>Total Harga</th>
-                                                    <th>DP</th>
-                                                    <th>Sisa</th>
-                                                    <th>Note</th>
-                                                    <th>Gambar</th>
-                                                    <th>Status</th>
-                                                    <th>Reject</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                include 'connection.php';
-
-                                                $id = $_GET['No_Invoice'];
-                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Order");
-                                                while ($row = mysqli_fetch_array($data)) {
-                                                    ?>
-                                                    <tr>
-                                                        <td>
-                                                            <a type='button' data-toggle="modal"
-                                                                data-target="#modal-<?php echo $row['No_Invoice'] ?>">
-                                                                <?php echo $row['No_Invoice'] ?>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Nama_Customer'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Nama_Pesanan'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Tanggal_Pesanan'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Tanggal_Jadi'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Total_Harga'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['DP_masuk'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Sisa_Pembayaran'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-sm btn-primary"
-                                                                href="<?php echo $row['Note'] ?>" download>Unduh</a>
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-sm btn-primary"
-                                                                href="<?php echo $row['Gambar'] ?>" download>Unduh</a>
-                                                        </td>
-                                                        <td>
-                                                            <?php if ($row['Status'] == 'New Order') { ?>
-                                                                <span class='badge badge-pill badge-info'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } elseif ($row['Status'] == 'Desain') { ?>
-                                                                <span class='badge badge-pill badge-secondary'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } elseif ($row['Status'] == 'Print') { ?>
-                                                                <span class='badge badge-pill badge-dark'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } elseif ($row['Status'] == 'Press') { ?>
-                                                                <span class='badge badge-pill badge-light'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } elseif ($row['Status'] == 'Jahit') { ?>
-                                                                <span class='badge badge-pill badge-primary'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } elseif ($row['Status'] == 'Finishing') { ?>
-                                                                <span class='badge badge-pill badge-success'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } elseif ($row['Status'] == 'Reject') { ?>
-                                                                <span class='badge badge-pill badge-danger'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } else { ?>
-                                                                <span class='badge badge-success'>
-                                                                    <?php echo $row['Status']; ?>
-                                                                </span>
-                                                            <?php } ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php if ($row['Reject'] == 'Tidak Ada Reject') { ?>
-                                                                <span class='badge badge-pill badge-success'>
-                                                                    <?php echo $row['Reject']; ?>
-                                                                </span>
-                                                            <?php } else { ?>
-                                                                <span class='badge badge-pill badge-danger'>
-                                                                    <?php echo $row['Reject']; ?>
-                                                                </span>
-                                                            <?php } ?>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-
-                                        <!-- Modal Detil -->
-                                        <?php
-                                        include 'connection.php';
-                                        $id = $_GET['No_Invoice'];
-                                        $data = mysqli_query($koneksi, "SELECT * FROM Table_Pesanan_Item GROUP BY No_Invoice");
-                                        while ($row = mysqli_fetch_array($data)) {
-                                            ?>
-                                            <div class="modal fade" id="modal-<?php echo $row['No_Invoice'] ?>">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">
-                                                                Detil Pesanan
-                                                                -
-                                                                <?php echo $row['No_Invoice'] ?>
-                                                            </h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="table-responsive">
-                                                                <table class='table m-0 table-hover text-nowrap'>
-                                                                    <thead>
-                                                                        <tr class='text-center'>
-                                                                            <th>Nama Item</th>
-                                                                            <th>Qty</th>
-                                                                            <th>Harga Satuan</th>
-                                                                            <th>Total Harga/item</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php
-                                                                        // Retrieve all data for the current No_Invoice group
-                                                                        $group_data = mysqli_query($koneksi, "SELECT * FROM Table_Pesanan_Item WHERE No_Invoice = '{$row['No_Invoice']}'");
-                                                                        while ($group_row = mysqli_fetch_array($group_data)) {
-                                                                            ?>
-                                                                            <tr class='text-center'>
-                                                                                <td>
-                                                                                    <?php echo $group_row['Nama_Item'] ?>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <?php echo $group_row['Qty'] ?>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <?php echo $group_row['Harga_Satuan'] ?>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <?php echo $group_row['Total_Harga_Item'] ?>
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?php } ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Tutup</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?>
-                                        <!-- Modal Detil -->
-                                    </div>
-                                </div>
-                                <!-- Card Footer -->
-                                <div class="card-footer clearfix">
-                                    <a href="javascript:void(0)"
-                                        class="btn btn-sm btn-secondary float-right">Pagination</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Main row -->
-                    <div class="row">
-                        <div class="col-md-8">
-
-                            <!-- TABLE -->
-                            <div class="card">
-                                <div class="card-header border-transparent">
-                                    <h3 class="card-title">List Inventory</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table m-0 table-hover text-nowrap">
-                                            <thead class="text-center">
-                                                <tr>
-                                                    <th>Kode</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Kategori</th>
-                                                    <th>Jenis Satuan</th>
-                                                    <th>Stock</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                include '../connection.php';
-
-                                                $id = $_GET['Kode_Barang'];
-                                                $data = mysqli_query($koneksi, "SELECT * FROM Table_Inventory");
-                                                while ($row = mysqli_fetch_array($data)) {
-                                                    ?>
-                                                    <tr class="text-center">
-
-                                                        <td>
-                                                            <?php echo $row['Kode_Barang'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Nama_Barang'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Kategori'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Jenis_Satuan'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['Stock'] ?>
-                                                        </td>
-
-                                                    </tr>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Card Footer -->
-                                <div class="card-footer clearfix">
-                                    <a href="javascript:void(0)"
-                                        class="btn btn-sm btn-secondary float-right">Pagination</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <!-- Info Boxes Style 2 -->
-
-                            <?php
-                            include 'connection.php';
-
-                            // Menghitung Jumlah Order
-                            $count_query = "SELECT COUNT(*) AS total_orders FROM Table_Order";
-                            $count_result = mysqli_query($koneksi, $count_query);
-
-                            $row = mysqli_fetch_assoc($count_result);
-                            $total_orders = $row['total_orders'];
-
-                            // Menghitung DP Masuk
-                            $total_dp_query = "SELECT SUM(CAST(REPLACE(DP_masuk, '.', '') AS DECIMAL)) AS total_dp FROM Table_Order";
-                            $result = mysqli_query($koneksi, $total_dp_query);
-                            $row = mysqli_fetch_assoc($result);
-                            $total_dp = $row['total_dp'];
-
-                            // Menghitung Riwayat Order
-                            $riwayat_query = "SELECT COUNT(*) as total_riwayat FROM Table_RiwayatOrder";
-                            $riwayat_result = mysqli_query($koneksi, $riwayat_query);
-
-                            $row = mysqli_fetch_assoc($riwayat_result);
-                            $total_riwayat = $row['total_riwayat'];
-
-                            ?>
-                            <div class="info-box mb-3 bg-warning">
-                                <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Order</span>
-                                    <span class="info-box-number">
-                                        <?php echo $total_orders; ?>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!-- <div class="info-box mb-3 bg-success">
-                                <span class="info-box-icon"><i class="fas fa-money-bill-wave"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">DP Masuk</span>
-                                    <span class="info-box-number">
-                                        <?php echo number_format($total_dp, 0, ',', '.'); ?>
-                                    </span>
-                                </div>
-                            </div> -->
-
-                            <div class="info-box mb-3 bg-danger">
-                                <span class="info-box-icon"><i class="fas fa-check"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Jumlah Riwayat Order</span>
-                                    <span class="info-box-number">
-                                        <?php echo $total_riwayat; ?>
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-            </section>
-        </div>
-
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="https://instagram.com/ensayiti">XEM</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Anything you want.</b>
+            <div class="border-2 border-dashed rounded-lg border-gray-300 h-96 mb-4"></div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
             </div>
-        </footer>
+            <div class="border-2 border-dashed rounded-lg border-gray-300 h-96 mb-4"></div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+                <div class="border-2 border-dashed rounded-lg border-gray-300 h-48 md:h-72"></div>
+            </div>
+        </main>
     </div>
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
-
-    <!-- jQuery Mapael -->
-    <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="plugins/raphael/raphael.min.js"></script>
-    <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
+    <!-- Flowbite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 </body>
 
 </html>
